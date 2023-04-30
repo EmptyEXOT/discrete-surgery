@@ -17,6 +17,7 @@ export function buildWebpackConfig(options: WebpackBuildOptions): webpack.Config
         mode: options.mode,
         resolve: {
             extensions: ['.tsx', '.ts', '.js'],
+            preferRelative: true
         },
         module: {
             rules: buildWebpackLoaders(),
