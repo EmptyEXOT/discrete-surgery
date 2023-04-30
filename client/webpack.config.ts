@@ -1,42 +1,22 @@
-import path from 'path';
 import webpack from 'webpack';
-import 'webpack-dev-server';
-import HtmlWebpackPlugin from "html-webpack-plugin";
-import {CleanWebpackPlugin} from "clean-webpack-plugin";
+import path from "path";
+import {buildWebpackConfig} from "./config/build/buildWebpackConfig";
+import {WebpackBuildMode} from "./config/build/types/WebpackOptions";
 
-const config: webpack.Configuration = {
-    entry: path.resolve(__dirname, 'src', 'index.tsx'),
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'index.js',
+const config: webpack.Configuration = buildWebpackConfig({
+    paths: {
+        entry: path.resolve(__dirname, 'src', 'index.tsx'),
+        output: path.resolve(__dirname, 'dist'),
+        template: path.resolve(__dirname, 'public', 'index.html')
     },
-    devServer: {
-        port: 9000,
+    hints: false,
+    devServerOptions: {
+        port: 3000,
         open: true,
         historyApiFallback: true,
+        hot: true
     },
-    mode: 'production',
-    resolve: {
-        extensions: ['.tsx', '.ts', '.js'],
-    },
-    module: {
-        rules: [
-            {
-                test: /\.tsx?$/,
-                use: 'ts-loader',
-                exclude: /node_modules/,
-            },
-        ],
-    },
-    plugins: [new HtmlWebpackPlugin({
-        template: path.resolve(__dirname, 'public', 'index.html')
-    }),
-        new CleanWebpackPlugin(),
-        new webpack.ProgressPlugin()
-    ],
-    performance: {
-        hints: false,
-    }
-};
+    mode: WebpackBuildMode.DEVELOPMENT
+});
 
 export default config;
