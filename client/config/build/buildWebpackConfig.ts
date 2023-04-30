@@ -1,9 +1,9 @@
-import {WebpackBuildOptions} from "./types/WebpackOptions";
+import { WebpackBuildOptions } from "./types/WebpackOptions";
 import webpack from "webpack";
 import 'webpack-dev-server';
-import {buildWebpackPlugins} from "./buildWebpackPlugins";
-import {buildDevServer} from "./buildDevServer";
-import {buildWebpackLoaders} from "./buildWebpackLoaders";
+import { buildWebpackPlugins } from "./buildWebpackPlugins";
+import { buildDevServer } from "./buildDevServer";
+import { buildWebpackLoaders } from "./buildWebpackLoaders";
 
 export function buildWebpackConfig(options: WebpackBuildOptions): webpack.Configuration {
     return {
